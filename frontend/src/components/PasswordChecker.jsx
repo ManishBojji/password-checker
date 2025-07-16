@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import sha1 from "js-sha1";
 import axios from "axios";
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 const PasswordChecker = () => {
   const [password, setPassword] = useState("");
@@ -69,7 +70,9 @@ const PasswordChecker = () => {
         const prefix = hash.slice(0, 5);
         const suffix = hash.slice(5);
 
-        const res = await axios.get(`http://localhost:5000/api/breach/${prefix}`);
+        const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+        const res = await axios.get(`${BACKEND_URL}/api/breach/${prefix}`);
+
         const hashes = res.data.trim().split("\r\n");
         const found = hashes.find((h) => h.split(":")[0] === suffix);
 
