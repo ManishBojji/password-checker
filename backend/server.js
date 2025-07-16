@@ -2,8 +2,13 @@ const express = require("express");
 const cors = require("cors");
 const axios = require("axios");
 
-const app = express();
+const app = express();  // <-- Create app first!
+
 app.use(cors());
+
+app.get("/", (req, res) => {
+  res.send("Password Checker API running 🚀");
+});
 
 app.get("/api/breach/:prefix", async (req, res) => {
   const { prefix } = req.params;
